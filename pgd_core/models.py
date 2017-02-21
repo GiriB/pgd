@@ -48,7 +48,7 @@ class Chain (models.Model):
         select_on_save = True
 
     def __str__(self):
-        return "<Chain protein= code=%s>" % (self.protein.code, self.code)
+        return "<Chain protein=%s code=%s>" % (self.protein.code, self.code)
 
 
 class Sidechain_ARG(models.Model):
