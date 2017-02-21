@@ -15,17 +15,17 @@ class OccupancyTestCase(TestCase):
     def setUp(self):
         # Called when run as `python manage.py test`
         self.residues = Residue.objects.all()
-        pass
         
     def test_occm_valid(self):
         # All Occm should always be between 0.0 and 1.0 (Inclusive) and should never be None
+       
         for i in self.residues:
            # Occm is not None AND Occm<=1 AND Occm>=0.0
             self.assertIsNotNone(i.occscs) and self.assertLessequal(i.occm,1.0) and self.assertGreaterEqual(i.occm, 0.0)
 
     def test_occsc_valid(self):
         # All Occscs value should be between 0.0 and 1.0 (Inclusive) and should never be None
-        print("IN OCCSC",len(self.residues))
+
         for i in self.residues:
             # Occscs is not None AND Occscs<=1 AND Occscss>=0.0
             self.assertIsNotNone(i.occscs) and self.assertLessequal(i.occscs,1.0) and self.assertGreaterEqual(i.occscs, 0.0)
@@ -35,18 +35,17 @@ class OccupancyTestCase(TestCase):
         # REF: https://code.osuosl.org/issues/17565
         
         for i in self.residues:
-            print(i.occscs)
+            
             if i.aa == "Gly":
-                self.assertIsNotNone(i.occscs) and self.assertLessequal(i.occscs,1.0) and self.assertGreaterEqual(i.occscs, 0.0)
+                self.assertEqual(i.occscs,1.0)
 
     def test_occsc_1_for_ALA(self):
         # Occsc value for ALANINE should be 1.0
         # REF: https://code.osuosl.org/issues/17565
         
         for i in self.residues:
-            print(i.occscs)
             if i.aa == "Ala":
-                self.assertIsNotNone(i.occscs) and self.assertLessequal(i.occscs,1.0) and self.assertGreaterEqual(i.occscs, 0.0)
+                self.assertEqual(i.occscs,1.0)
 
     def start_test(self):
         test_occm_valid()
