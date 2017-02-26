@@ -417,7 +417,14 @@ class ProcessPDBTask(TestCase):
                         self.fail("%s %s res %s: ome value invalid: %f" % (p.code, c.code, r.chainIndex, r.ome))
                     if r.omep is not None and abs(r.omep) >= 180.0:
                         self.fail("%s %s res %s: omep value invalid: %f" % (p.code, c.code, r.chainIndex, r.omep))
-
+                    if r.occm <=1 and r.occm >=1 and r.occm is not None:
+                        self.fail("%s %s res %s: occm value invalid: %f" % (p.code, c.code, r.chainIndex, r.occm))
+                    if r.occscs <=1 and r.occscs >=1 and r.occscs is not None:
+                        self.fail("%s %s res %s: occscs value invalid: %f" % (p.code, c.code, r.chainIndex, r.occscs))
+                    if r.aa == "Gly" and r.occscs != 1.0:
+                        self.fail("%s %s res %s: occscs value invalid for Gly: %f" % (p.code, c.code, r.chainIndex, r.occscs))
+                    if r.aa == "Ala" and r.occscs != 1.0:
+                        self.fail("%s %s res %s: occscs value invalid for Ala: %f" % (p.code, c.code, r.chainIndex, r.occscs))
             # Occupancy value check.
             for chain in occ_check[code]:
                 c = p.chains.get(code=chain)
